@@ -35,6 +35,7 @@ const createStore = <T>(createState) => {
         }
     }
     const subscribe: Subscribe = (listener) => {
+        // react 给出监听器，当数据改变时需要调用所有监听器函数通知react更新
         listeners.add(listener)
         return () => {
             listeners.delete(listener)
@@ -72,6 +73,7 @@ export const create = (createState) => {
         //     },
         //   })
     const api = createStore(createState)
+    // 去掉这块逻辑就是vanilla 版本
     const useBoundStore = (selector, equalityFn) =>
         useStore(api, selector, equalityFn);
       return useBoundStore;
